@@ -567,7 +567,7 @@ async function addToCart(productId, selectedSize = null, selectedColor = null) {
     );
     if (existingProduct) {
         // Increase quantity if already exists with same size/color
-        existingProduct.quantity += 1;
+        existingProduct.quantity + 1;
         showNotification('Quantity updated in cart!', 'success');
     } else {
         // Add new product to cart
