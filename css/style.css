@@ -2129,3 +2129,31 @@
 
 .trending-pro{background: #f4f4f4;}
 
+/* Breadcrumb */
+        .breadcrumb {
+            background: white;
+            padding: 15px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .breadcrumb-nav {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+        }
+        .breadcrumb-nav a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .breadcrumb-nav a:hover {
+            color: var(--primary);
+        }
+        .breadcrumb-nav .separator {
+            color: var(--gray);
+        }
+        .breadcrumb-nav .current {
+            color: var(--dark);
+            font-weight: 500;
+        }
+
