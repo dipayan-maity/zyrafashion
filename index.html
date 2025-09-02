@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zyra - Fashion Trends and Premium Style Store</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="css/style.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button class="close-cart" id="closeCart">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- Cart items will be dynamically added here -->
+        </div>
+        <div class="cart-summary">
+            <div class="cart-total">
+                <span>Subtotal:</span>
+                <span id="cartSubtotal">$0.00</span>
+            </div>
+        </div>
+        <div class="cart-actions">
+            <button class="btn btn-outline" id="continueShopping">Continue Shopping</button>
+            <button class="btn btn-primary" id="viewCart">View Cart</button>
+        </div>
+    </div>
+    <!-- Cart Overlay -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <!-- Top Bar - Simplified -->
+    <div class="top-bar">
+        <div class="container">
+            <i class="fas fa-shipping-fast me-2"></i>
+            Get Free delivery from $2000
+            <a href="#" class="ms-2">Shop Now</a>
+        </div>
+    </div>
+    <!-- Header - Fixed Layout -->
+    <header class="header">
+        <div class="container">
+            <div class="header-container">
+                <div class="logo-section">
+                    <a href="#" class="logo">
+                        <i class="fas fa-shopping-bag"></i>
+                        Zyra
+                    </a>
+                </div>
+                
+                <nav class="nav-menu">
+                    <ul class="nav-menu">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="shop.html">Shop</a></li>
+                        <li><a href="catgory.html">Categories</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="header-actions">
+                    <button class="action-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <button class="action-btn">
+                        <i class="fas fa-user"></i>
+                    </button>
+                    <button class="action-btn wishlist-btn">
+                        <i class="fas fa-heart"></i>
+                        <span class="wishlist-count">0</span>
+                    </button>
+                    <button class="action-btn" id="cartButton">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Hero Slider -->
+    <section class="hero-slider">
+        <div class="slide active" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('images/slider1.webp');">
+            <div class="container">
+                <div class="slide-content">
+                    <div class="slide-badge">Winter Collection</div>
+                    <h1 class="slide-title">New Winter Collections 2025</h1>
+                    <p class="slide-subtitle">There's nothing like trend</p>
+                    <a href="#" class="slide-btn">Shop Now</a>
+                </div>
+            </div>
+        </div>
+        <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('images/slider2.webp');">
+            <div class="container">
+                <div class="slide-content">
+                    <div class="slide-badge">Summer Sale</div>
+                    <h1 class="slide-title">Up to 50% Off</h1>
+                    <p class="slide-subtitle">Limited time offer</p>
+                    <a href="#" class="slide-btn">Shop Now</a>
+                </div>
+            </div>
+        </div>
+        <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('images/slider3.webp');">
+            <div class="container">
+                <div class="slide-content">
+                    <div class="slide-badge">New Arrivals</div>
+                    <h1 class="slide-title">Latest Fashion Trends</h1>
+                    <p class="slide-subtitle">Be the first to get them</p>
+                    <a href="#" class="slide-btn">Shop Now</a>
+                </div>
+            </div>
+        </div>
+        <div class="slider-nav">
+            <div class="slider-dot active" data-slide="0"></div>
+            <div class="slider-dot" data-slide="1"></div>
+            <div class="slider-dot" data-slide="2"></div>
+        </div>
+    </section>
+    <!-- Categories Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <div class="section-subtitle">Popular Categories</div>
+                <h2 class="section-heading">Trending Categories</h2>
+            </div>
+            <div class="category-grid">
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-tshirt"></i>
+                    </div>
+                    <h3 class="category-name">Men's Wear</h3>
+                    <p class="category-count">245 Products</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-female"></i>
+                    </div>
+                    <h3 class="category-name">Women's Wear</h3>
+                    <p class="category-count">312 Products</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-child"></i>
+                    </div>
+                    <h3 class="category-name">Kid's Wear</h3>
+                    <p class="category-count">189 Products</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-shoe-prints"></i>
+                    </div>
+                    <h3 class="category-name">Footwear</h3>
+                    <p class="category-count">98 Products</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Deal of the Day - Enhanced -->
+    <section class="deal-section">
+        <div class="container">
+            <div class="section-title">
+                <div class="section-subtitle">Limited Time Offer</div>
+                <h2 class="section-heading">Deal of the Day</h2>
+            </div>
+            
+            <div class="deal-container">
+                <div class="deal-image">
+                    <img src="images/dress2.jpg" alt="Deal Product">
+                </div>
+                
+                <div class="deal-content">
+                    <div class="deal-badge">
+                        <i class="fas fa-fire me-2"></i>Hot Deal
+                    </div>
+                    <h3 class="deal-title">Women Striped Shirt Dress</h3>
+                    <p class="deal-subtitle">Limited quantity available. Don't miss out on this amazing deal!</p>
+                    
+                    <div class="deal-price">
+                        <span class="deal-current-price">$99.00</span>
+                        <span class="deal-old-price">$129.00</span>
+                        <span class="deal-discount">-23%</span>
+                    </div>
+                    
+                    <div class="countdown">
+                        <div class="countdown-item">
+                            <div class="countdown-number" id="hours">12</div>
+                            <div class="countdown-label">Hours</div>
+                        </div>
+                        <div class="countdown-item">
+                            <div class="countdown-number" id="minutes">45</div>
+                            <div class="countdown-label">Minutes</div>
+                        </div>
+                        <div class="countdown-item">
+                            <div class="countdown-number" id="seconds">30</div>
+                            <div class="countdown-label">Seconds</div>
+                        </div>
+                    </div>
+                    <a href="product-details.html" class="slide-btn">Shop Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Trending Products Section -->
+    <section class="section product trending-pro">
+        <div class="container">
+            <div class="section-title">
+                <div class="section-subtitle">Top Picks</div>
+                <h2 class="section-heading">Trending Products</h2>
+            </div>
+            <div class="product-grid" id="trendingProductsGrid">
+                <!-- Trending products will be dynamically added here -->
+            </div>
+        </div>
+    </section>
+    
+    <!-- Products Section -->
+    <section class="section product">
+        <div class="container">
+            <div class="section-title">
+                <div class="section-subtitle">Our Products</div>
+                <h2 class="section-heading">Featured Products</h2>
+            </div>
+            
+            <div class="product-tabs">
+                <button class="tab-btn active" data-tab="all">All</button>
+                <button class="tab-btn" data-tab="mens">Men's</button>
+                <button class="tab-btn" data-tab="womens">Women</button>
+                <button class="tab-btn" data-tab="kids">Kids</button>
+            </div>
+            
+            <!-- All Products Tab -->
+            <div class="tab-content active" id="all">
+                <div class="product-grid" id="productGrid-all"></div>
+            </div>
+            
+            <!-- Men's Products Tab -->
+            <div class="tab-content" id="mens">
+                <div class="product-grid" id="productGrid-mens"></div>
+            </div>
+            
+            <!-- Women's Products Tab -->
+            <div class="tab-content" id="womens">
+                <div class="product-grid" id="productGrid-womens"></div>
+            </div>
+            
+            <!-- Kids Products Tab -->
+            <div class="tab-content" id="kids">
+                <div class="product-grid" id="productGrid-kids"></div>
+            </div>
+            
+            <div class="text-center mt-5">
+                <a href="#" class="slide-btn">View All Products</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Partners Section -->
+    <section class="partners">
+        <div class="container">
+            <div class="section-title">
+                <div class="section-subtitle">Trusted By</div>
+                <h2 class="section-heading">Our Partners</h2>
+            </div>
+            
+            <div class="partners-slider">
+                <div class="partners-track">
+                    <!-- First set of logos -->
+                    <div class="partner-logo">
+                        <img src="images/brand01.svg" alt="Brand 01">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="images/brand02.svg" alt="Brand 02">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="images/brand03.svg" alt="Brand 03">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="images/brand04.svg" alt="Brand 04">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="images/brand05.svg" alt="Brand 05">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="images/brand06.svg" alt="Brand 06">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="images/brand01.svg" alt="Brand 01">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="images/brand02.svg" alt="Brand 02">
+                    </div>
+                    <!-- Duplicate set for seamless loop -->
+                    <div class="partner-logo">
+                        <img src="images/brand03.svg" alt="Brand 03">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="images/brand04.svg" alt="Brand 04">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="images/brand05.svg" alt="Brand 05">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="images/brand06.svg" alt="Brand 06">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="images/brand01.svg" alt="Brand 01">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="images/brand02.svg" alt="Brand 02">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="images/brand03.svg" alt="Brand 03">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="images/brand04.svg" alt="Brand 04">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Blog Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <div class="section-subtitle">Fashion Insights</div>
+                <h2 class="section-heading">Style Stories</h2>
+            </div>
+            
+            <div class="blog-grid">
+                <div class="blog-card">
+                    <img src="images/blog-1.webp" alt="Summer Fashion Trends" class="blog-img">
+                    <div class="blog-content">
+                        <div class="blog-date">March 13, 2025</div>
+                        <h3 class="blog-title">Summer 2025 Fashion Trends: Boho Chic & Sustainable Style</h3>
+                        <p class="blog-excerpt">Discover the latest summer fashion trends that are dominating the runways and streets. From vibrant colors to sustainable fabrics, learn how to stay stylish while being eco-conscious.</p>
+                        <a href="#" class="blog-link">Continue Reading <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <img src="images/blog-2.webp" alt="Fashion Trends" class="blog-img">
+                    <div class="blog-content">
+                        <div class="blog-date">May 5, 2025</div>
+                        <h3 class="blog-title">Capsule Wardrobe: Timeless Fashion Pieces Every Woman Needs</h3>
+                        <p class="blog-excerpt">Every fashionista needs a solid foundation. Learn about the must-have pieces that will transform your wardrobe and help you create countless outfit combinations.</p>
+                        <a href="#" class="blog-link">Continue Reading <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <img src="images/blog-3.webp" alt="Fashion Accessories" class="blog-img">
+                    <div class="blog-content">
+                        <div class="blog-date">June 19, 2025</div>
+                        <h3 class="blog-title">Pattern Play: Mastering Fashion's Bold Print Revolution</h3>
+                        <p class="blog-excerpt">Gone are the days when mixing patterns was a fashion faux pas. Learn the expert techniques for combining stripes, florals, and geometrics to create stunning, cohesive looks.</p>
+                        <a href="#" class="blog-link">Continue Reading <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <div class="section-subtitle">Customer Reviews</div>
+                <h2 class="section-heading">What Our Customers Say</h2>
+            </div>
+            
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Customer" class="testimonial-avatar">
+                        <div class="testimonial-info">
+                            <h4>Sarah Johnson</h4>
+                            <p>Fashion Blogger</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"I absolutely love shopping at Zyra! The quality is exceptional and the customer service is outstanding. Highly recommend to anyone looking for trendy fashion."</p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Customer" class="testimonial-avatar">
+                        <div class="testimonial-info">
+                            <h4>Michael Chen</h4>
+                            <p>Business Owner</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p class="testimonial-text">"Zyra has become my go-to store for all my clothing needs. The variety is amazing and the prices are very competitive. Great shopping experience!"</p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="https://randomuser.me/api/portraits/women/28.jpg" alt="Customer" class="testimonial-avatar">
+                        <div class="testimonial-info">
+                            <h4>Emma Williams</h4>
+                            <p>Student</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"The fast shipping and easy returns policy make shopping at Zyra so convenient. Plus, their clothes are always in style and fit perfectly!"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <div class="section-subtitle">Why Choose Us</div>
+                <h2 class="section-heading">Our Features</h2>
+            </div>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shipping-fast"></i>
+                    </div>
+                    <h3 class="feature-title">Free Shipping</h3>
+                    <p class="feature-desc">Capped at $10 per order</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="feature-title">Secure Payments</h3>
+                    <p class="feature-desc">Up to 6 months installments</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-undo-alt"></i>
+                    </div>
+                    <h3 class="feature-title">15-Days Returns</h3>
+                    <p class="feature-desc">Shop with fully confidence</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3 class="feature-title">24x7 Support</h3>
+                    <p class="feature-desc">Get friendly support</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Instagram Section - Full Width -->
+    <section class="instagram-section">
+        <div class="container-fluid">
+            <div class="instagram-header">
+                <div class="section-subtitle">Follow Us</div>
+                <h2 class="section-heading">Instagram Gallery</h2>
+                <div class="instagram-handle">@zyra</div>
+            </div>
+            
+            <div class="instagram-grid">
+                <div class="instagram-item">
+                    <img src="images/dress1.jpg" alt="Fashion Dress" class="instagram-img">
+                    <div class="instagram-overlay">
+                        <i class="fab fa-instagram instagram-icon"></i>
+                    </div>
+                </div>
+                <div class="instagram-item">
+                    <img src="images/dress2.jpg" alt="Striped Dress" class="instagram-img">
+                    <div class="instagram-overlay">
+                        <i class="fab fa-instagram instagram-icon"></i>
+                    </div>
+                </div>
+                <div class="instagram-item">
+                    <img src="images/dress3.jpg" alt="Summer Dress" class="instagram-img">
+                    <div class="instagram-overlay">
+                        <i class="fab fa-instagram instagram-icon"></i>
+                    </div>
+                </div>
+                <div class="instagram-item">
+                    <img src="images/dress4.jpg" alt="Casual Dress" class="instagram-img">
+                    <div class="instagram-overlay">
+                        <i class="fab fa-instagram instagram-icon"></i>
+                    </div>
+                </div>
+                <div class="instagram-item">
+                    <img src="images/dress5.jpg" alt="Elegant Dress" class="instagram-img">
+                    <div class="instagram-overlay">
+                        <i class="fab fa-instagram instagram-icon"></i>
+                    </div>
+                </div>
+                <div class="instagram-item">
+                    <img src="images/Camo-Graphic-Women's-Regular-Fit-Hoodie.avif" alt="Camo Hoodie" class="instagram-img">
+                    <div class="instagram-overlay">
+                        <i class="fab fa-instagram instagram-icon"></i>
+                    </div>
+                </div>
+                <div class="instagram-item">
+                    <img src="images/Women's-Lightweight-Padded-Jacket.avif" alt="Padded Jacket" class="instagram-img">
+                    <div class="instagram-overlay">
+                        <i class="fab fa-instagram instagram-icon"></i>
+                    </div>
+                </div>
+                <div class="instagram-item">
+                    <img src="images/Men's-Slim-Fit-Polo-T-shirt.avif" alt="Polo T-shirt" class="instagram-img">
+                    <div class="instagram-overlay">
+                        <i class="fab fa-instagram instagram-icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Newsletter Section - Elegant -->
+    <section class="newsletter-section">
+        <div class="container">
+            <div class="newsletter-card">
+                <div class="newsletter-image"><img src="images/newletter.png"></div>
+                <div class="newsletter-content">
+                    <h3 class="newsletter-title">Subscribe to Our Newsletter</h3>
+                    <p class="newsletter-desc">Subscribe to receive updates, new products and good deals.</p>
+                    <form class="newsletter-form">
+                        <input type="email" class="newsletter-input" placeholder="Your email address">
+                        <button type="submit" class="newsletter-btn">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer - Elegant -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <a href="#" class="footer-logo">
+                        <i class="fas fa-shopping-bag me-2"></i>
+                        Zyra
+                    </a>
+                    <p class="footer-desc">
+                        We are a team of designers and developers that create high quality fashion products for everyone.
+                    </p>
+                    <div class="payment-methods">
+                        <div class="payment-method">
+                            <i class="fab fa-cc-visa"></i> Visa
+                        </div>
+                        <div class="payment-method">
+                            <i class="fab fa-cc-mastercard"></i> Mastercard
+                        </div>
+                        <div class="payment-method">
+                            <i class="fab fa-cc-paypal"></i> PayPal
+                        </div>
+                        <div class="payment-method">
+                            <i class="fab fa-cc-stripe"></i> Stripe
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4><i class="fas fa-headset me-2"></i>Supports</h4>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-chevron-right"></i><a href="#">Contact </a></li>
+                        <li><i class="fas fa-chevron-right"></i><a href="#">About </a></li>
+                        <li><i class="fas fa-chevron-right"></i><a href="#">Size </a></li>
+                        <li><i class="fas fa-chevron-right"></i><a href="#">Shipping & Returns</a></li>
+                        <li><i class="fas fa-chevron-right"></i><a href="#">FAQ's </a></li>
+                        <li><i class="fas fa-chevron-right"></i><a href="#">Privacy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4><i class="fas fa-shopping-bag me-2"></i>Shop</h4>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-chevron-right"></i><a href="#">Men's Shopping</a></li>
+                        <li><i class="fas fa-chevron-right"></i><a href="#">Women's Shopping</a></li>
+                        <li><i class="fas fa-chevron-right"></i><a href="#">Kids's Shopping</a></li>
+                        <li><i class="fas fa-chevron-right"></i><a href="#">Furniture</a></li>
+                        <li><i class="fas fa-chevron-right"></i><a href="#">Discounts</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4><i class="fas fa-building me-2"></i>Company</h4>
+                    <div class="footer-contact">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-info">
+                            3298 Grant Street Longview, TX<br>
+                            United Kingdom 75601
+                        </div>
+                    </div>
+                    <div class="footer-contact">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="contact-info">
+                            1-202-555-0106
+                        </div>
+                    </div>
+                    <div class="footer-contact">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-info">
+                            help@shopper.com
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" class="social-link">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-pinterest"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="container">
+                    <p>&copy; 2025 Zyra. developed by zyra fashion store</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Notification Toast -->
+<div class="notification-toast" id="notificationToast">
+    <div class="toast-icon">
+        <i class="fas fa-check-circle"></i>
+    </div>
+    <div class="toast-content">
+        <div class="toast-title" id="toastTitle">Success!</div>
+        <div class="toast-message" id="toastMessage">Item added successfully</div>
+    </div>
+    <button class="toast-close" id="toastClose">
+        <i class="fas fa-times"></i>
+    </button>
+</div>
+    <!-- Back to Top Button -->
+    <div class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script src="main.js"></script>
+    <script>
+        // Pause animation on hover
+        document.querySelector('.partners-track').addEventListener('mouseenter', function() {
+            this.style.animationPlayState = 'paused';
+        });
+        document.querySelector('.partners-track').addEventListener('mouseleave', function() {
+            this.style.animationPlayState = 'running';
+        });
+    </script>
+</body>
+</html>
