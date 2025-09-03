@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elegant Hero Slider</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #d4af37;
+            --secondary: #8a6d3b;
+            --dark: #1a1a1a;
+            --light: #ffffff;
+            --overlay: rgba(0, 0, 0, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Hero Slider */
+        .hero-slider {
+            position: relative;
+            height: 100vh;
+            min-height: 600px;
+            overflow: hidden;
+        }
+        
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform: scale(1.05);
+            will-change: transform, opacity;
+        }
+        
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, 
+                        rgba(0, 0, 0, 0.7) 0%, 
+                        rgba(0, 0, 0, 0.4) 50%,
+                        rgba(0, 0, 0, 0.3) 100%);
+            z-index: 1;
+        }
+        
+        .slide.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .slide-content {
+            max-width: 650px;
+            padding: 0 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease 0.5s;
+        }
+        
+        .slide.active .slide-content {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .slide-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--dark);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+        
+        .slide-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .slide-subtitle {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 35px;
+            font-weight: 400;
+            line-height: 1.6;
+            max-width: 90%;
+        }
+        
+        .slide-btn {
+            display: inline-flex;
+            align-items: center;
+            background: var(--primary);
+            color: var(--dark);
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .slide-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: all 0.6s ease;
+        }
+        
+        .slide-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .slide-btn:hover::before {
+            left: 100%;
+        }
+        
+        .slide-btn i {
+            margin-left: 10px;
+            transition: transform 0.3s ease;
+        }
+        
+        .slide-btn:hover i {
+            transform: translateX(5px);
+        }
+        
+        /* Navigation */
+        .slider-nav {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            z-index: 10;
+        }
+        
+        .slider-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+        }
+        
+        .slider-dot:hover {
+            background: rgba(255, 255, 255, 0.7);
+        }
+        
+        .slider-dot.active {
+            background: var(--primary);
+            transform: scale(1.2);
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Arrows */
+        .slider-arrows {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 30px;
+            z-index: 10;
+            transform: translateY(-50%);
+        }
+        
+        .arrow {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .arrow:hover {
+            background: var(--primary);
+            color: var(--dark);
+            transform: scale(1.1);
+        }
+        
+        /* Progress bar */
+        .progress-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 4px;
+            background: var(--primary);
+            width: 0%;
+            z-index: 10;
+            transition: width 0.3s linear;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .slide-title {
+                font-size: 2.5rem;
+            }
+            
+            .slide-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .arrow {
+                width: 40px;
+                height: 40px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .slide-title {
+                font-size: 2rem;
+            }
+            
+            .slide-content {
+                text-align: center;
+                padding: 0 10px;
+            }
+            
+            .slide-subtitle {
+                max-width: 100%;
+            }
+            
+            .slider-arrows {
+                padding: 0 15px;
+            }
+            
+            .arrow {
+                width: 35px;
+                height: 35px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero-slider">
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.1&auto=format&fit=crop&w=1350&q=80');">
+            <div class="container">
+                <div class="slide-content">
+                    <div class="slide-badge">Winter Collection</div>
+                    <h1 class="slide-title">New Winter Collections 2025</h1>
+                    <p class="slide-subtitle">Discover our exclusive winter line crafted for elegance and warmth in the coldest seasons.</p>
+                    <a href="#" class="slide-btn">Shop Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?ixlib=rb-4.0.1&auto=format&fit=crop&w=1350&q=80');">
+            <div class="container">
+                <div class="slide-content">
+                    <div class="slide-badge">Summer Sale</div>
+                    <h1 class="slide-title">Up to 50% Off</h1>
+                    <p class="slide-subtitle">Enjoy our special summer promotion with incredible discounts on selected items.</p>
+                    <a href="#" class="slide-btn">Discover Deals <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-4.0.1&auto=format&fit=crop&w=1350&q=80');">
+            <div class="container">
+                <div class="slide-content">
+                    <div class="slide-badge">New Arrivals</div>
+                    <h1 class="slide-title">Latest Fashion Trends</h1>
+                    <p class="slide-subtitle">Be the first to explore our newest collection inspired by contemporary fashion trends.</p>
+                    <a href="#" class="slide-btn">Explore Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slider-nav">
+            <div class="slider-dot active" data-slide="0"></div>
+            <div class="slider-dot" data-slide="1"></div>
+            <div class="slider-dot" data-slide="2"></div>
+        </div>
+        
+        <div class="slider-arrows">
+            <div class="arrow prev"><i class="fas fa-chevron-left"></i></div>
+            <div class="arrow next"><i class="fas fa-chevron-right"></i></div>
+        </div>
+        
+        <div class="progress-bar"></div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            const dots = document.querySelectorAll('.slider-dot');
+            const prevBtn = document.querySelector('.arrow.prev');
+            const nextBtn = document.querySelector('.arrow.next');
+            const progressBar = document.querySelector('.progress-bar');
+            
+            let currentSlide = 0;
+            let slideInterval;
+            const slideDuration = 5000; // 5 seconds per slide
+            
+            // Function to show a specific slide
+            function showSlide(n) {
+                // Remove active class from all slides and dots
+                slides.forEach(slide => slide.classList.remove('active'));
+                dots.forEach(dot => dot.classList.remove('active'));
+                
+                // Adjust index if out of bounds
+                if (n >= slides.length) currentSlide = 0;
+                if (n < 0) currentSlide = slides.length - 1;
+                else currentSlide = n;
+                
+                // Add active class to current slide and dot
+                slides[currentSlide].classList.add('active');
+                dots[currentSlide].classList.add('active');
+                
+                // Reset and start progress bar
+                progressBar.style.width = '0%';
+                clearInterval(progressInterval);
+                startProgressBar();
+            }
+            
+            // Function for automatic sliding
+            function startSlider() {
+                slideInterval = setInterval(() => {
+                    showSlide(currentSlide + 1);
+                }, slideDuration);
+            }
+            
+            // Function for progress bar animation
+            function startProgressBar() {
+                let width = 0;
+                const intervalTime = slideDuration / 100;
+                
+                progressInterval = setInterval(() => {
+                    if (width >= 100) {
+                        clearInterval(progressInterval);
+                    } else {
+                        width++;
+                        progressBar.style.width = width + '%';
+                    }
+                }, intervalTime);
+            }
+            
+            // Event listeners for dots
+            dots.forEach(dot => {
+                dot.addEventListener('click', function() {
+                    const slideIndex = parseInt(this.getAttribute('data-slide'));
+                    clearInterval(slideInterval);
+                    showSlide(slideIndex);
+                    startSlider();
+                });
+            });
+            
+            // Event listeners for arrows
+            prevBtn.addEventListener('click', () => {
+                clearInterval(slideInterval);
+                showSlide(currentSlide - 1);
+                startSlider();
+            });
+            
+            nextBtn.addEventListener('click', () => {
+                clearInterval(slideInterval);
+                showSlide(currentSlide + 1);
+                startSlider();
+            });
+            
+            // Pause slider on hover
+            const slider = document.querySelector('.hero-slider');
+            slider.addEventListener('mouseenter', () => {
+                clearInterval(slideInterval);
+                clearInterval(progressInterval);
+            });
+            
+            slider.addEventListener('mouseleave', () => {
+                startSlider();
+            });
+            
+            // Initialize slider
+            startSlider();
+            startProgressBar();
+        });
+    </script>
+</body>
+</html>

@@ -817,7 +817,7 @@
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
         }
         .blog-img {
-            height: 200px;
+            height: auto;
             width: 100%;
             object-fit: cover;
         }
