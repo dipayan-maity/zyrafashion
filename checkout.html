@@ -757,9 +757,9 @@
         function updateOrderSummary() {
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
             const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
-            const shipping = subtotal > 0 ? (subtotal > 2000 ? 0 : 5) : 0;
-            const tax = subtotal * 0.08; // 8% tax
-            
+            const shipping = 0; // Free shipping
+            const tax = 0; // No tax
+
             document.getElementById('orderSubtotal').textContent = `$${subtotal.toFixed(2)}`;
             document.getElementById('orderShipping').textContent = `$${shipping.toFixed(2)}`;
             document.getElementById('orderTax').textContent = `$${tax.toFixed(2)}`;
@@ -893,10 +893,14 @@
                 
                 // In a real application, this would process the order
                 showNotification('Order placed successfully!');
-                
+
+                // Store order data temporarily before clearing cart
+                const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                localStorage.setItem('lastOrder', JSON.stringify(cart));
+
                 // Clear cart
                 localStorage.removeItem('cart');
-                
+
                 // Redirect to thank you page after a delay
                 setTimeout(() => {
                     window.location.href = 'thank-you.html';

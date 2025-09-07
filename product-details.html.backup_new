@@ -1406,106 +1406,70 @@
             .product-title {
                 font-size: 24px;
             }
-
+            
             .product-price .current-price {
                 font-size: 24px;
             }
-
+            
             .product-price .old-price {
                 font-size: 18px;
             }
-
+            
             .related-products-grid {
                 grid-template-columns: 1fr;
-                gap: 20px;
             }
-
+            
             .thumbnail-images {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
                 gap: 10px;
-                overflow-x: visible;
             }
-
+            
             .thumbnail {
-                min-width: auto;
-                width: 100%;
-                height: auto;
-                aspect-ratio: 1;
+                min-width: 80px;
+                height: 80px;
             }
-
+            
             .size-option {
                 width: 45px;
                 height: 45px;
             }
-
+            
             .quantity-btn {
                 width: 40px;
                 height: 40px;
             }
-
+            
             .quantity-input {
                 width: 50px;
                 height: 40px;
             }
-
+            
             .btn-wishlist {
                 width: 45px;
                 height: 45px;
             }
-
+            
             .spec-table td:first-child {
                 width: 40%;
             }
-
+            
             .notification-toast {
                 left: 20px;
                 right: 20px;
                 max-width: none;
             }
-
+            
             .footer-content {
                 grid-template-columns: 1fr;
                 gap: 30px;
             }
-
+            
             .footer-col {
                 margin-bottom: 20px;
             }
-
+            
             .footer-bottom {
                 padding: 15px 0;
             }
-
-            .tab-nav {
-                flex-wrap: wrap;
-            }
-
-            .tab-link {
-                padding: 10px 15px;
-            }
-
-            .product-meta {
-                flex-direction: column;
-            }
-
-            .product-actions {
-                gap: 10px;
-            }
-
-            .product-details {
-                padding: 20px 0;
-            }
-
-            .section {
-                padding: 30px 0;
-            }
-        }
-        /* Full width tabs */
-        .full-width-tabs {
-            grid-column: 1 / -1;
-            width: 100%;
-            margin-top: 40px;
         }
     </style>
 </head>
@@ -1591,7 +1555,11 @@
                         <i class="fas fa-shopping-bag"></i>
                         Zyra
                     </a>
+                    <button class="mobile-menu-btn" id="mobileMenuBtn">
+                        <i class="fas fa-bars"></i>
+                    </button>
                 </div>
+                
                 <nav class="nav-menu">
                     <ul class="nav-menu">
                         <li><a href="index.html">Home</a></li>
@@ -1602,7 +1570,7 @@
                         <li><a href="index.html">Contact</a></li>
                     </ul>
                 </nav>
-
+                
                 <div class="header-actions">
                     <button class="action-btn">
                         <i class="fas fa-search"></i>
@@ -1617,9 +1585,6 @@
                     <button class="action-btn cart-btn" id="cartButton">
                         <i class="fas fa-shopping-cart"></i>
                         <span class="cart-count">0</span>
-                    </button>
-                    <button class="mobile-menu-btn" id="mobileMenuBtn">
-                        <i class="fas fa-bars"></i>
                     </button>
                 </div>
             </div>
@@ -1726,28 +1691,29 @@
                             <span>Easy Returns</span>
                         </div>
                     </div>
-                </div>
-                <!-- Product Tabs full width -->
-                <div class="product-tabs full-width-tabs">
-                    <div class="tab-nav">
-                        <button class="tab-link active" data-tab="description">Description</button>
-                        <button class="tab-link" data-tab="specifications">Specifications</button>
-                        <button class="tab-link" data-tab="reviews">Reviews</button>
-                    </div>
                     
-                    <div class="tab-content active" id="description">
-                        <p id="tabDescription"></p>
-                    </div>
-                    
-                    <div class="tab-content" id="specifications">
-                        <table class="spec-table" id="specTable">
-                            <!-- Specifications will be dynamically added -->
-                        </table>
-                    </div>
-                    
-                    <div class="tab-content" id="reviews">
-                        <div id="reviewsContainer">
-                            <!-- Reviews will be dynamically added -->
+                    <!-- Product Tabs -->
+                    <div class="product-tabs">
+                        <div class="tab-nav">
+                            <button class="tab-link active" data-tab="description">Description</button>
+                            <button class="tab-link" data-tab="specifications">Specifications</button>
+                            <button class="tab-link" data-tab="reviews">Reviews</button>
+                        </div>
+                        
+                        <div class="tab-content active" id="description">
+                            <p id="tabDescription"></p>
+                        </div>
+                        
+                        <div class="tab-content" id="specifications">
+                            <table class="spec-table" id="specTable">
+                                <!-- Specifications will be dynamically added -->
+                            </table>
+                        </div>
+                        
+                        <div class="tab-content" id="reviews">
+                            <div id="reviewsContainer">
+                                <!-- Reviews will be dynamically added -->
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -18,7 +18,7 @@ async function fetchProducts() {
                 "id": 1,
                 "name": "Women Striped Shirt Dress",
                 "category": "Dresses",
-                "image": "https://images.unsplash.com/photo-1523381210438-861888d1a5eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                "image": "images/dress1.jpg",
                 "price": 99.00,
                 "oldPrice": 129.00,
                 "discount": 23,
@@ -32,7 +32,7 @@ async function fetchProducts() {
                 "id": 2,
                 "name": "Men's Running Shoes",
                 "category": "Footwear",
-                "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                "image": "images/Court-Shatter-Low-Sneakers.avif",
                 "price": 129.00,
                 "oldPrice": null,
                 "discount": null,
@@ -46,7 +46,7 @@ async function fetchProducts() {
                 "id": 3,
                 "name": "Women Printed A-Line Dress",
                 "category": "Dresses",
-                "image": "https://images.unsplash.com/photo-1485178575877-1a13bf489dfe?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                "image": "images/dress2.jpg",
                 "price": 110.00,
                 "oldPrice": 149.00,
                 "discount": 26,
@@ -60,7 +60,7 @@ async function fetchProducts() {
                 "id": 4,
                 "name": "Girls Fit and Flare Dress",
                 "category": "Kids",
-                "image": "https://images.unsplash.com/photo-1501127122-f385ca6ddd9d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                "image": "images/dress3.jpg",
                 "price": 99.00,
                 "oldPrice": null,
                 "discount": null,
@@ -74,7 +74,7 @@ async function fetchProducts() {
                 "id": 5,
                 "name": "Men's Casual Shirt",
                 "category": "Men's Wear",
-                "image": "https://images.unsplash.com/photo-1551024703-7b2892d70f3c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                "image": "images/Men's-Slim-Fit-Polo-T-shirt.avif",
                 "price": 79.00,
                 "oldPrice": 99.00,
                 "discount": 20,
@@ -87,7 +87,7 @@ async function fetchProducts() {
                 "id": 6,
                 "name": "Women's Handbag",
                 "category": "Accessories",
-                "image": "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                "image": "images/photo-1544005313-94ddf0286df2.avif",
                 "price": 149.00,
                 "oldPrice": null,
                 "discount": null,
@@ -100,7 +100,7 @@ async function fetchProducts() {
                 "id": 7,
                 "name": "Boys Solid Sweatshirt",
                 "category": "Kids",
-                "image": "https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                "image": "images/Futuristic-Logo-Men's-Slim-Fit-Hoodie.avif",
                 "price": 89.00,
                 "oldPrice": 119.00,
                 "discount": 25,
@@ -113,7 +113,7 @@ async function fetchProducts() {
                 "id": 8,
                 "name": "Women's Sneakers",
                 "category": "Footwear",
-                "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+                "image": "images/X-ray-Prism-Men's-Sneakers.avif",
                 "price": 109.00,
                 "oldPrice": null,
                 "discount": null,
@@ -295,6 +295,24 @@ function renderTrendingProducts() {
 
 // Function to add event listeners to product cards
 function addProductEventListeners() {
+    // Remove existing event listeners by cloning nodes
+    document.querySelectorAll('.cart-btn').forEach(btn => {
+        const newBtn = btn.cloneNode(true);
+        btn.parentNode.replaceChild(newBtn, btn);
+    });
+    document.querySelectorAll('.wishlist-btn').forEach(btn => {
+        const newBtn = btn.cloneNode(true);
+        btn.parentNode.replaceChild(newBtn, btn);
+    });
+    document.querySelectorAll('.details-btn').forEach(btn => {
+        const newBtn = btn.cloneNode(true);
+        btn.parentNode.replaceChild(newBtn, btn);
+    });
+    document.querySelectorAll('.product-img').forEach(img => {
+        const newImg = img.cloneNode(true);
+        img.parentNode.replaceChild(newImg, img);
+    });
+
     // Add to cart buttons
     document.querySelectorAll('.cart-btn').forEach(btn => {
         btn.addEventListener('click', function(e) {
@@ -567,7 +585,7 @@ async function addToCart(productId, selectedSize = null, selectedColor = null) {
     );
     if (existingProduct) {
         // Increase quantity if already exists with same size/color
-        existingProduct.quantity + 1;
+        existingProduct.quantity += 1;
         showNotification('Quantity updated in cart!', 'success');
     } else {
         // Add new product to cart
